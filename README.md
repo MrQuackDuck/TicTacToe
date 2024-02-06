@@ -20,7 +20,7 @@
 
 ## Permissions
 
-- `tictactoe.admin` - Allows to reload the plugin (with `/ttc reload`)
+- `tictactoe.admin` - Allows to reload the plugin (with `/ttt reload`)
 
 > [!NOTE]
 > Wait for extended permissions in upcoming versions!
