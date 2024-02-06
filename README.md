@@ -6,7 +6,7 @@
   <a href="https://github.com/vshymanskyy/StandWithUkraine"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg"></a>
 </p>
 
- **TicTacToe** is a **Spigot** plugin that allows you to play Tic Tac Toe with your friends in inventory-based GUI.
+ **TicTacToe** is a **Spigot** plugin that allows you to play **Tic Tac Toe** with your friends in inventory-based GUI.
 
 ## Screenshots
 <img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/cdbdc3c0-2aff-46ab-888b-43e91f86c754" />
@@ -65,3 +65,12 @@ messages:
   "plugin-reloaded": "&#318CE7Plugin was reloaded!"
   "failed-to-reload": "&#CF1020Plugin was failed to reload."
 ```
+
+## Getting started
+
+> [!IMPORTANT]
+> Before getting started, make sure that the plugin's version is **compatible** with your server version.
+
+1. Download the plugin from <a href="https://github.com/MrQuackDuck/TicTacToe/releases">Releases</a> tab or from <a href="https://www.spigotmc.org/resources/tictactoe.114959/">Spigot</a> page.
+1. Put downloaded `.jar` into `/plugins` folder of your server.
+1. Restart your server or enter `reload` command.
