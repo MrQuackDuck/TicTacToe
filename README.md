@@ -13,10 +13,10 @@
 <img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/e90e3e7e-52db-49e4-a5b7-a582fef5d130" />
 
 ## Commands
-- `/ttc info` — shows info about commands.
-- `/ttc invite <player>` — invite a player to play.
-- `/ttc accept` — accept the invite to play.
-- `/ttc reload` — reload the config.
+- `/ttt info` — shows info about commands.
+- `/ttt invite <player>` — invite a player to play.
+- `/ttt accept` — accept the invite to play.
+- `/ttt reload` — reload the config.
 
 ## Permissions
 
