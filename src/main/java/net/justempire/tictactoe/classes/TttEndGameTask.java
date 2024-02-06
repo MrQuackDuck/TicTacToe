@@ -1,12 +1,11 @@
 package net.justempire.tictactoe.classes;
 
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class TtcEndGameTask extends BukkitRunnable {
-    private final TtcMatch match;
+public class TttEndGameTask extends BukkitRunnable {
+    private final TttMatch match;
 
-    public TtcEndGameTask(TtcMatch match) {
+    public TttEndGameTask(TttMatch match) {
         this.match = match;
     }
 

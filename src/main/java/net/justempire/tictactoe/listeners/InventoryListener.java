@@ -1,8 +1,8 @@
 package net.justempire.tictactoe.listeners;
 
 import net.justempire.tictactoe.TicTacToe;
-import net.justempire.tictactoe.classes.TtcMatch;
-import net.justempire.tictactoe.classes.TtcPlayer;
+import net.justempire.tictactoe.classes.TttMatch;
+import net.justempire.tictactoe.classes.TttPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,10 +15,10 @@ public class InventoryListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory inventory = event.getInventory();
-        TtcMatch match = null;
+        TttMatch match = null;
 
         for (int i = 0; i < TicTacToe.matches.size(); i++) {
-            TtcMatch ttcMatch = TicTacToe.matches.get(i);
+            TttMatch ttcMatch = TicTacToe.matches.get(i);
             if (!ttcMatch.getGui().equals(inventory)) continue;
             if (!ttcMatch.containsPlayer(player)) continue;
 
@@ -33,8 +33,8 @@ public class InventoryListener implements Listener {
         int slot = event.getSlot();
 
         // Sending player's move to TicTacToe match
-        if (player == firstPlayer) match.move(TtcPlayer.FIRST, slot);
-        else if (player == secondPlayer) match.move(TtcPlayer.SECOND, slot);
+        if (player == firstPlayer) match.move(TttPlayer.FIRST, slot);
+        else if (player == secondPlayer) match.move(TttPlayer.SECOND, slot);
 
         // Preventing a player from taking items from the game inventory
         event.setCancelled(true);
@@ -46,7 +46,7 @@ public class InventoryListener implements Listener {
         Inventory inventory = event.getInventory();
 
         for (int i = 0; i < TicTacToe.matches.size(); i++) {
-            TtcMatch match = TicTacToe.matches.get(i);
+            TttMatch match = TicTacToe.matches.get(i);
             // Determining if the closed inventory was exactly TicTacToe game inventory
             if (!match.getGui().equals(inventory)) continue;
             if (!match.containsPlayer(player)) continue;
@@ -55,8 +55,8 @@ public class InventoryListener implements Listener {
             Player secondPlayer = match.getSecondPlayer();
 
             // Aborting the game
-            if (player == firstPlayer) match.gameAbortedByPlayer(TtcPlayer.FIRST);
-            else if (player == secondPlayer) match.gameAbortedByPlayer(TtcPlayer.SECOND);
+            if (player == firstPlayer) match.gameAbortedByPlayer(TttPlayer.FIRST);
+            else if (player == secondPlayer) match.gameAbortedByPlayer(TttPlayer.SECOND);
 
             break;
         }

@@ -5,12 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Collection;
-
-public class TtcReloadCommand {
+public class TttReloadCommand {
     private final TicTacToe plugin;
 
-    public  TtcReloadCommand(JavaPlugin plugin) {
+    public TttReloadCommand(JavaPlugin plugin) {
         this.plugin = (TicTacToe) plugin;
     }
 

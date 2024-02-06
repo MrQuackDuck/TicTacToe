@@ -1,8 +1,8 @@
 package net.justempire.tictactoe;
 
-import net.justempire.tictactoe.classes.TtcPlayRequest;
-import net.justempire.tictactoe.classes.TtcMatch;
-import net.justempire.tictactoe.commands.TtcCommand;
+import net.justempire.tictactoe.classes.TttPlayRequest;
+import net.justempire.tictactoe.classes.TttMatch;
+import net.justempire.tictactoe.commands.TttCommand;
 import net.justempire.tictactoe.listeners.InventoryListener;
 import net.justempire.tictactoe.utils.MessageColorizer;
 import org.bukkit.configuration.ConfigurationSection;
@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public final class TicTacToe extends JavaPlugin {
-    public static List<TtcMatch> matches = new ArrayList<>();
-    public static List<TtcPlayRequest> requests = new ArrayList<>();
+    public static List<TttMatch> matches = new ArrayList<>();
+    public static List<TttPlayRequest> requests = new ArrayList<>();
 
     private static Map<String, String> messages = new HashMap<>();
 
@@ -27,7 +27,7 @@ public final class TicTacToe extends JavaPlugin {
         configure();
 
         // Setting up the command
-        TtcCommand ttcCommand = new TtcCommand(this);
+        TttCommand ttcCommand = new TttCommand(this);
         getCommand("tictactoe").setExecutor(ttcCommand);
 
         // Registering inventory interaction events

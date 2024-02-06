@@ -1,6 +1,6 @@
 package net.justempire.tictactoe.classes;
 
-public enum TtcPlayer {
+public enum TttPlayer {
     NONE,
     FIRST,
     SECOND

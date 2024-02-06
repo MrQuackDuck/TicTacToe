@@ -1,18 +1,17 @@
 package net.justempire.tictactoe.commands;
 
 import net.justempire.tictactoe.TicTacToe;
-import net.justempire.tictactoe.classes.TtcPlayRequest;
-import net.justempire.tictactoe.classes.TtcMatch;
+import net.justempire.tictactoe.classes.TttPlayRequest;
+import net.justempire.tictactoe.classes.TttMatch;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class TtcAcceptCommand {
+public class TttAcceptCommand {
     private final JavaPlugin plugin;
 
-    public  TtcAcceptCommand(JavaPlugin plugin) {
+    public TttAcceptCommand(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -25,7 +24,7 @@ public class TtcAcceptCommand {
         Player player = (Player) commandSender;
 
         // Checking if there are any pending requests to the player
-        TtcPlayRequest request = null;
+        TttPlayRequest request = null;
         for (int i = 0; i < TicTacToe.requests.size(); i++) {
             if (!TicTacToe.requests.get(i).getReceiver().getDisplayName().equals(player.getDisplayName())) continue;
 
@@ -43,7 +42,7 @@ public class TtcAcceptCommand {
         Player sender = request.getSender();
 
         // Initializing new TicTacToe match
-        TtcMatch match = new TtcMatch(sender, player, plugin);
+        TttMatch match = new TttMatch(sender, player, plugin);
         TicTacToe.matches.add(match);
 
         // Sending notifying messages to players

@@ -2,11 +2,11 @@ package net.justempire.tictactoe.classes;
 
 import org.bukkit.entity.Player;
 
-public class TtcPlayRequest {
+public class TttPlayRequest {
     private Player sender;
     private Player receiver;
 
-    public TtcPlayRequest(Player sender, Player receiver) {
+    public TttPlayRequest(Player sender, Player receiver) {
         this.sender = sender;
         this.receiver = receiver;
     }

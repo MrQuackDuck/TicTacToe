@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Arrays;
 import java.util.Random;
 
-public class TtcMatch {
+public class TttMatch {
     public JavaPlugin plugin;
 
     private final Material firstPlayerItem;
@@ -24,9 +24,9 @@ public class TtcMatch {
     private final Player secondPlayer;
     private Inventory gui;
 
-    private TtcPlayer whoseTurn;
+    private TttPlayer whoseTurn;
 
-    public TtcMatch(Player firstPlayer, Player secondPlayer, JavaPlugin plugin) {
+    public TttMatch(Player firstPlayer, Player secondPlayer, JavaPlugin plugin) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.plugin = plugin;
@@ -41,12 +41,12 @@ public class TtcMatch {
         Arrays.fill(field, -1);
 
         // Randomly choosing who will have the first turn (except TtcPlayer.NONE)
-        whoseTurn = TtcPlayer.values()[new Random().nextInt(TtcPlayer.values().length - 1) + 1];
+        whoseTurn = TttPlayer.values()[new Random().nextInt(TttPlayer.values().length - 1) + 1];
 
         updateGui();
     }
 
-    public void move(TtcPlayer player, int slotIndex) {
+    public void move(TttPlayer player, int slotIndex) {
         // Checking if the slot is in bounds of the field (3 x 3)
         if (slotIndex < 0 || slotIndex > 8) return;
 
@@ -59,29 +59,29 @@ public class TtcMatch {
         // Setting the value of field cell with corresponding player index
         field[slotIndex] = player.ordinal();
 
-        TtcMatchState state = getFieldState();
+        TttMatchState state = getFieldState();
 
-        if (state == TtcMatchState.FIRST_PLAYER_WON) {
-            whoseTurn = TtcPlayer.NONE;
-            win(TtcPlayer.FIRST);
+        if (state == TttMatchState.FIRST_PLAYER_WON) {
+            whoseTurn = TttPlayer.NONE;
+            win(TttPlayer.FIRST);
             return;
         }
 
-        if (state == TtcMatchState.SECOND_PLAYER_WON) {
-            whoseTurn = TtcPlayer.NONE;
-            win(TtcPlayer.SECOND);
+        if (state == TttMatchState.SECOND_PLAYER_WON) {
+            whoseTurn = TttPlayer.NONE;
+            win(TttPlayer.SECOND);
             return;
         }
 
-        if (state == TtcMatchState.DRAW) {
-            whoseTurn = TtcPlayer.NONE;
+        if (state == TttMatchState.DRAW) {
+            whoseTurn = TttPlayer.NONE;
             draw();
             return;
         }
 
         // Choosing who will have the next move
-        if (whoseTurn == TtcPlayer.FIRST) whoseTurn = TtcPlayer.SECOND;
-        else if (whoseTurn == TtcPlayer.SECOND) whoseTurn = TtcPlayer.FIRST;
+        if (whoseTurn == TttPlayer.FIRST) whoseTurn = TttPlayer.SECOND;
+        else if (whoseTurn == TttPlayer.SECOND) whoseTurn = TttPlayer.FIRST;
 
         updateGui();
     }
@@ -98,7 +98,7 @@ public class TtcMatch {
         // Setting default window title, if provided is null
         if (customTitle == null) {
             Player playerWhoseMove;
-            if (whoseTurn == TtcPlayer.FIRST) playerWhoseMove = firstPlayer;
+            if (whoseTurn == TttPlayer.FIRST) playerWhoseMove = firstPlayer;
             else playerWhoseMove = secondPlayer;
             customTitle = String.format(TicTacToe.getMessage(this, "gui-player's-turn", true), playerWhoseMove.getDisplayName());
         }
@@ -110,9 +110,9 @@ public class TtcMatch {
         for (int i = 0; i < field.length; i++) {
             if (field[i] == -1) continue;
 
-            if (TtcPlayer.values()[field[i]] == TtcPlayer.FIRST)
+            if (TttPlayer.values()[field[i]] == TttPlayer.FIRST)
                 gui.setItem(i, new ItemStack(firstPlayerItem));
-            else if (TtcPlayer.values()[field[i]] == TtcPlayer.SECOND)
+            else if (TttPlayer.values()[field[i]] == TttPlayer.SECOND)
                 gui.setItem(i, new ItemStack(secondPlayerItem));
         }
 
@@ -125,11 +125,11 @@ public class TtcMatch {
         return gui;
     }
 
-    public void win(TtcPlayer player) {
+    public void win(TttPlayer player) {
         Player winner;
         Player looser;
 
-        if (player == TtcPlayer.FIRST) {
+        if (player == TttPlayer.FIRST) {
             winner = firstPlayer;
             looser = secondPlayer;
         }
@@ -145,7 +145,7 @@ public class TtcMatch {
         looser.sendMessage(loseMessage);
         updateGui(String.format(TicTacToe.getMessage(this, "gui-player-won", true), winner.getDisplayName()));
 
-        new TtcEndGameTask(this).runTaskLater(this.plugin, 30);
+        new TttEndGameTask(this).runTaskLater(this.plugin, 30);
     }
 
     public void draw() {
@@ -167,11 +167,11 @@ public class TtcMatch {
         secondPlayer.closeInventory();
     }
 
-    public void gameAbortedByPlayer(TtcPlayer player) {
+    public void gameAbortedByPlayer(TttPlayer player) {
         String winMessage = TicTacToe.getMessage(this, "opponent-aborted-game");
         String loseMessage = TicTacToe.getMessage(this, "you-aborted-game");
 
-        if (player == TtcPlayer.FIRST)
+        if (player == TttPlayer.FIRST)
         {
             firstPlayer.sendMessage(loseMessage);
             secondPlayer.sendMessage(winMessage);
@@ -198,7 +198,7 @@ public class TtcMatch {
         return secondPlayer;
     }
 
-    private TtcMatchState getFieldState() {
+    private TttMatchState getFieldState() {
         int[][] twoDField = new int[3][3];
 
         // Converting field to 2D-array
@@ -214,9 +214,9 @@ public class TtcMatch {
             if (twoDField[0][y] == -1) continue;
 
             if (twoDField[0][y] == twoDField[1][y] && twoDField[1][y] == twoDField[2][y]) {
-                TtcPlayer winner = TtcPlayer.values()[twoDField[0][y]];
-                if (winner == TtcPlayer.FIRST) return TtcMatchState.FIRST_PLAYER_WON;
-                if (winner == TtcPlayer.SECOND) return TtcMatchState.SECOND_PLAYER_WON;
+                TttPlayer winner = TttPlayer.values()[twoDField[0][y]];
+                if (winner == TttPlayer.FIRST) return TttMatchState.FIRST_PLAYER_WON;
+                if (winner == TttPlayer.SECOND) return TttMatchState.SECOND_PLAYER_WON;
             }
         }
 
@@ -225,24 +225,24 @@ public class TtcMatch {
             if (twoDField[x][0] == -1) continue;
 
             if (twoDField[x][0] == twoDField[x][1] && twoDField[x][1] == twoDField[x][2]) {
-                TtcPlayer winner = TtcPlayer.values()[twoDField[x][0]];
-                if (winner == TtcPlayer.FIRST) return TtcMatchState.FIRST_PLAYER_WON;
-                if (winner == TtcPlayer.SECOND) return TtcMatchState.SECOND_PLAYER_WON;
+                TttPlayer winner = TttPlayer.values()[twoDField[x][0]];
+                if (winner == TttPlayer.FIRST) return TttMatchState.FIRST_PLAYER_WON;
+                if (winner == TttPlayer.SECOND) return TttMatchState.SECOND_PLAYER_WON;
             }
         }
 
         // Checking diagonals
         if (twoDField[0][0] == twoDField[1][1] && twoDField[1][1] == twoDField[2][2] && twoDField[0][0] != -1)
         {
-            TtcPlayer winner = TtcPlayer.values()[twoDField[0][0]];
-            if (winner == TtcPlayer.FIRST) return TtcMatchState.FIRST_PLAYER_WON;
-            if (winner == TtcPlayer.SECOND) return TtcMatchState.SECOND_PLAYER_WON;
+            TttPlayer winner = TttPlayer.values()[twoDField[0][0]];
+            if (winner == TttPlayer.FIRST) return TttMatchState.FIRST_PLAYER_WON;
+            if (winner == TttPlayer.SECOND) return TttMatchState.SECOND_PLAYER_WON;
         }
         if (twoDField[0][2] == twoDField[1][1] && twoDField[1][1] == twoDField[2][0] && twoDField[0][2] != -1)
         {
-            TtcPlayer winner = TtcPlayer.values()[twoDField[0][2]];
-            if (winner == TtcPlayer.FIRST) return TtcMatchState.FIRST_PLAYER_WON;
-            if (winner == TtcPlayer.SECOND) return TtcMatchState.SECOND_PLAYER_WON;
+            TttPlayer winner = TttPlayer.values()[twoDField[0][2]];
+            if (winner == TttPlayer.FIRST) return TttMatchState.FIRST_PLAYER_WON;
+            if (winner == TttPlayer.SECOND) return TttMatchState.SECOND_PLAYER_WON;
         }
 
         // Checking if the field is full
@@ -252,8 +252,8 @@ public class TtcMatch {
                 if (twoDField[x][y] == -1) emptyFields++;
             }
         }
-        if (emptyFields == 0) return TtcMatchState.DRAW;
+        if (emptyFields == 0) return TttMatchState.DRAW;
 
-        return TtcMatchState.GAME_NOT_FINISHED;
+        return TttMatchState.GAME_NOT_FINISHED;
     }
 }

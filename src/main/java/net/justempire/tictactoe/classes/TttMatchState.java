@@ -1,6 +1,6 @@
 package net.justempire.tictactoe.classes;
 
-public enum TtcMatchState {
+public enum TttMatchState {
     GAME_NOT_FINISHED,
     DRAW,
     FIRST_PLAYER_WON,

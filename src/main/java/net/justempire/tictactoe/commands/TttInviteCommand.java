@@ -1,7 +1,7 @@
 package net.justempire.tictactoe.commands;
 
 import net.justempire.tictactoe.TicTacToe;
-import net.justempire.tictactoe.classes.TtcPlayRequest;
+import net.justempire.tictactoe.classes.TttPlayRequest;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -9,10 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Collection;
 
-public class TtcInviteCommand {
+public class TttInviteCommand {
     private final JavaPlugin plugin;
 
-    public  TtcInviteCommand(JavaPlugin plugin) {
+    public TttInviteCommand(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -55,7 +55,7 @@ public class TtcInviteCommand {
 
         // Removing requests the sander made before
         for (int i = 0; i < TicTacToe.requests.size(); i++) {
-            TtcPlayRequest request = TicTacToe.requests.get(i);
+            TttPlayRequest request = TicTacToe.requests.get(i);
             if (request.getSender() != sender) continue;
 
             TicTacToe.requests.remove(request);
@@ -64,7 +64,7 @@ public class TtcInviteCommand {
         }
 
         // Generating a request and adding it to pending requests list
-        TtcPlayRequest request = new TtcPlayRequest(sender, receiver);
+        TttPlayRequest request = new TttPlayRequest(sender, receiver);
         TicTacToe.requests.add(request);
 
         // Sending notifying messages to players

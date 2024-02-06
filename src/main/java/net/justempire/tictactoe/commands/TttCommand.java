@@ -1,7 +1,6 @@
 package net.justempire.tictactoe.commands;
 
 import net.justempire.tictactoe.TicTacToe;
-import net.justempire.tictactoe.classes.TtcPlayRequest;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,10 +13,10 @@ import org.bukkit.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TtcCommand implements CommandExecutor, TabCompleter {
+public class TttCommand implements CommandExecutor, TabCompleter {
     private final JavaPlugin plugin;
 
-    public  TtcCommand(JavaPlugin plugin) {
+    public TttCommand(JavaPlugin plugin) {
         this.plugin = plugin;
     }
 
@@ -25,20 +24,20 @@ public class TtcCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length == 0) {
             // Returning info if command was empty
-            return new TtcInfoCommand().onCommand(commandSender, command, s, strings);
+            return new TttInfoCommand().onCommand(commandSender, command, s, strings);
         }
         // Delegating command parameters to dedicated handlers
         else if (strings[0].equalsIgnoreCase("info")) {
-            return new TtcInfoCommand().onCommand(commandSender, command, s, strings);
+            return new TttInfoCommand().onCommand(commandSender, command, s, strings);
         }
         else if (strings[0].equalsIgnoreCase("invite")) {
-            return new TtcInviteCommand(plugin).onCommand(commandSender, command, s, strings);
+            return new TttInviteCommand(plugin).onCommand(commandSender, command, s, strings);
         }
         else if (strings[0].equalsIgnoreCase("accept")) {
-            return new TtcAcceptCommand(plugin).onCommand(commandSender, command, s, strings);
+            return new TttAcceptCommand(plugin).onCommand(commandSender, command, s, strings);
         }
         else if (strings[0].equalsIgnoreCase("reload") && commandSender.hasPermission("tictactoe.admin")) {
-            return new TtcReloadCommand(plugin).onCommand(commandSender, command, s, strings);
+            return new TttReloadCommand(plugin).onCommand(commandSender, command, s, strings);
         }
         else {
             commandSender.sendMessage(TicTacToe.getMessage(this, "command-not-found"));
