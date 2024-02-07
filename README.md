@@ -25,7 +25,7 @@
 - `tictactoe.accept` _(**true** by default)_ — Allows a player to accept other player's invites (with `/ttt accept`)
 
 > [!CAUTION]
-> A player with `tictactoe.accept` permissions set to `false` won't see incoming play requests.
+> A player with `tictactoe.accept` permission set to `false` won't see incoming play requests.
 
 ## Default config
 ```yml
