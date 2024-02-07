@@ -2,6 +2,7 @@ package net.justempire.tictactoe.commands;
 
 import net.justempire.tictactoe.TicTacToe;
 import net.justempire.tictactoe.classes.TttPlayRequest;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class TttInviteCommand {
             return true;
         }
 
-        // Return if receiver's name wasn't provided
+        // Return if receiver name wasn't provided in argument
         if (strings.length != 2) {
             commandSender.sendMessage(TicTacToe.getMessage(this, "provide-a-name"));
             return true;
@@ -31,15 +32,7 @@ public class TttInviteCommand {
 
         String receiverName = strings[1];
         Player sender = (Player) commandSender;
-        Player receiver = null;
-
-        // Checking if provided receiver is present online
-        Collection<Player> players = (Collection<Player>) plugin.getServer().getOnlinePlayers();
-        for (Player p : players) {
-            if (!p.getDisplayName().equals(receiverName)) continue;
-            receiver = p;
-            break;
-        }
+        Player receiver = Bukkit.getPlayer(receiverName);
 
         // Return if receiver wasn't found
         if (receiver == null) {
@@ -47,20 +40,25 @@ public class TttInviteCommand {
             return true;
         }
 
-        // Return if request was sent by sender to himself
+        // Return if request was sent by a sender to himself
         if (receiver.getDisplayName().equals(sender.getDisplayName())) {
             sender.sendMessage(TicTacToe.getMessage(this, "cant-send-to-yourself"));
             return true;
         }
 
-        // Removing requests the sander made before
+        if (!receiver.hasPermission("tictactoe.accept")) {
+            sender.sendMessage(TicTacToe.getMessage(this, "receiver-does-not-have-enough-permissions"));
+            return true;
+        }
+
+        // Removing the requests may be made by a sender before
         for (int i = 0; i < TicTacToe.requests.size(); i++) {
             TttPlayRequest request = TicTacToe.requests.get(i);
             if (request.getSender() != sender) continue;
 
             TicTacToe.requests.remove(request);
             sender.sendMessage(TicTacToe.getMessage(this, "previous-request-was-deleted"));
-            i--;
+            break;
         }
 
         // Generating a request and adding it to pending requests list
@@ -69,7 +67,7 @@ public class TttInviteCommand {
 
         // Sending notifying messages to players
         sender.sendMessage(TicTacToe.getMessage(this, "request-sent-successfully"));
-        receiver.sendMessage(TicTacToe.getMessage(this, "received-a-request"));
+        receiver.sendMessage(String.format(TicTacToe.getMessage(this, "received-a-request"), sender.getDisplayName()));
 
         return true;
     }

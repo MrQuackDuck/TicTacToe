@@ -11,5 +11,11 @@ commands:
 
 permissions:
   tictactoe.admin:
-    description: Allows to reload the plugin
+    description: Allows a player to reload the plugin
     default: op
+  tictactoe.invite:
+    description: Allows a player to invite other players
+    default: true
+  tictactoe.accept:
+    description: Allows a player to accept other player's invites
+    default: true

@@ -14,8 +14,6 @@ public class TttReloadCommand {
 
     @SuppressWarnings("unchecked")
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (!commandSender.hasPermission("tictactoe.admin")) return true;
-
         try {
             plugin.reload();
             commandSender.sendMessage(TicTacToe.getMessage(this, "plugin-reloaded"));

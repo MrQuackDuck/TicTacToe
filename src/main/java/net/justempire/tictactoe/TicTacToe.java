@@ -20,13 +20,13 @@ public final class TicTacToe extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Creating config if it doesn't exist
+        // Creating a config if it doesn't exist
         saveDefaultConfig();
 
-        // Setting up config
+        // Setting up the config
         configure();
 
-        // Setting up the command
+        // Setting up the /tictactoe command
         TttCommand ttcCommand = new TttCommand(this);
         getCommand("tictactoe").setExecutor(ttcCommand);
 
@@ -42,7 +42,7 @@ public final class TicTacToe extends JavaPlugin {
     }
 
     private void configure() {
-        // Getting the messages from config
+        // Getting the messages from the config
         ConfigurationSection configSection = getConfig().getConfigurationSection("messages");
         if (configSection != null) {
             Map<String, Object> messages = configSection.getValues(true);
@@ -55,7 +55,7 @@ public final class TicTacToe extends JavaPlugin {
     }
 
     public void reload() {
-        // Ending all matches
+        // Ending all active matches before reloading the plugin
         for (int i = 0; i < matches.size(); i++) {
             matches.get(i).end();
             i--;
@@ -65,7 +65,7 @@ public final class TicTacToe extends JavaPlugin {
         configure();
     }
 
-    // Returns the message by key from config
+    // Returns a message from the config by key
     public static String getMessage(Object sender, String key, boolean showGuiPrefix) {
         if (messages == null) return String.format("Message %s wasn't found (messages list is null)", key);
         if (messages.get(key) == null) return String.format("Message %s wasn't found", key);

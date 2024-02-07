@@ -23,18 +23,25 @@ public class TttMatch {
     private final Player firstPlayer;
     private final Player secondPlayer;
     private Inventory gui;
-
     private TttPlayer whoseTurn;
+    private final boolean  broadcastWinEnabled;
+    private final boolean broadcastDrawEnabled;
+
 
     public TttMatch(Player firstPlayer, Player secondPlayer, JavaPlugin plugin) {
         this.firstPlayer = firstPlayer;
         this.secondPlayer = secondPlayer;
         this.plugin = plugin;
 
-        // Getting the items from config
-        ConfigurationSection configSection = plugin.getConfig().getConfigurationSection("items");
-        firstPlayerItem = Material.valueOf(configSection.get("first").toString());
-        secondPlayerItem = Material.valueOf(configSection.get("second").toString());
+        // Getting the items from the config
+        ConfigurationSection items = plugin.getConfig().getConfigurationSection("items");
+        this.firstPlayerItem = Material.valueOf(items.get("first").toString());
+        this.secondPlayerItem = Material.valueOf(items.get("second").toString());
+
+        // Getting misc information from the config
+        ConfigurationSection misc = plugin.getConfig().getConfigurationSection("misc");
+        this.broadcastWinEnabled = (boolean) misc.get("broadcastWinEnabled");
+        this.broadcastDrawEnabled = (boolean) misc.get("broadcastDrawEnabled");
 
         // Initializing the field
         field = new int[9];
@@ -47,16 +54,16 @@ public class TttMatch {
     }
 
     public void move(TttPlayer player, int slotIndex) {
-        // Checking if the slot is in bounds of the field (3 x 3)
+        // Return if the slot is not in bounds of the field (3 x 3)
         if (slotIndex < 0 || slotIndex > 8) return;
 
-        // Checking if player is allowed to make a turn
+        // Return if player is not allowed to make a turn
         if (whoseTurn != player) return;
 
-        // Checking if this slot was already taken
+        // Return if provided slot was already taken
         if (field[slotIndex] != -1) return;
 
-        // Setting the value of field cell with corresponding player index
+        // Setting the value of a field cell with corresponding player index
         field[slotIndex] = player.ordinal();
 
         TttMatchState state = getFieldState();
@@ -95,7 +102,7 @@ public class TttMatch {
     // Updates the gui with current state of a game
     public void updateGui(String customTitle) {
 
-        // Setting default window title, if provided is null
+        // Setting default window title, if customTitle is null
         if (customTitle == null) {
             Player playerWhoseMove;
             if (whoseTurn == TttPlayer.FIRST) playerWhoseMove = firstPlayer;
@@ -106,7 +113,7 @@ public class TttMatch {
         // Creating new inventory with updated state
         gui = Bukkit.createInventory(null, InventoryType.DROPPER, customTitle);
 
-        // Filling the inventory
+        // Filling up the inventory with current items
         for (int i = 0; i < field.length; i++) {
             if (field[i] == -1) continue;
 
@@ -138,6 +145,11 @@ public class TttMatch {
             looser = firstPlayer;
         }
 
+        if (this.broadcastWinEnabled) {
+            String winBroadcastMessage = String.format(TicTacToe.getMessage(this, "broadcast-win-message"), winner.getDisplayName(), looser.getDisplayName());
+            Bukkit.broadcastMessage(winBroadcastMessage);
+        }
+
         String winMessage = String.format(TicTacToe.getMessage(this, "you-won"), looser.getDisplayName());
         String loseMessage = String.format(TicTacToe.getMessage(this, "you-lost"), winner.getDisplayName());
 
@@ -155,6 +167,11 @@ public class TttMatch {
         secondPlayer.sendMessage(drawMessage);
 
         updateGui(TicTacToe.getMessage(this, "gui-draw", true));
+
+        if (this.broadcastDrawEnabled) {
+            String winBroadcastMessage = String.format(TicTacToe.getMessage(this, "broadcast-draw-message"), firstPlayer.getDisplayName(), secondPlayer.getDisplayName());
+            Bukkit.broadcastMessage(winBroadcastMessage);
+        }
 
         this.end();
     }

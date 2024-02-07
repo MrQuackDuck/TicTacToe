@@ -23,7 +23,7 @@ public class TttAcceptCommand {
 
         Player player = (Player) commandSender;
 
-        // Checking if there are any pending requests to the player
+        // Getting the latest pending request to play Tic Tac Toe
         TttPlayRequest request = null;
         for (int i = 0; i < TicTacToe.requests.size(); i++) {
             if (!TicTacToe.requests.get(i).getReceiver().getDisplayName().equals(player.getDisplayName())) continue;
@@ -33,7 +33,7 @@ public class TttAcceptCommand {
             i--;
         }
 
-        // Return if any request wasn't found
+        // Return if not a single play request wasn't found
         if (request == null) {
             player.sendMessage(TicTacToe.getMessage(this, "request-to-play-wasnt-found"));
             return true;
@@ -41,7 +41,7 @@ public class TttAcceptCommand {
 
         Player sender = request.getSender();
 
-        // Initializing new TicTacToe match
+        // Initializing a new TicTacToe match
         TttMatch match = new TttMatch(sender, player, plugin);
         TicTacToe.matches.add(match);
 
