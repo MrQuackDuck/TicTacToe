@@ -9,18 +9,18 @@
  **TicTacToe** is a **Spigot** plugin that allows you to play **Tic Tac Toe** with your friends in inventory-based GUI.
 
 ## Screenshots
-<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/cdbdc3c0-2aff-46ab-888b-43e91f86c754" />
-<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/e90e3e7e-52db-49e4-a5b7-a582fef5d130" />
+<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/52ae74ca-efe1-4391-83cf-abcaa8650e55" />
+<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/1f503a64-0865-43cc-9fdf-6f6c44a5496b" />
 
 ## Commands
-- `/ttc info` — shows info about commands.
-- `/ttc invite <player>` — invite a player to play.
-- `/ttc accept` — accept the invite to play.
-- `/ttc reload` — reload the config.
+- `/ttt info` — shows info about commands.
+- `/ttt invite <player>` — invite a player to play.
+- `/ttt accept` — accept the invite to play.
+- `/ttt reload` — reload the config.
 
 ## Permissions
 
-- `tictactoe.admin` - Allows to reload the plugin (with `/ttc reload`)
+- `tictactoe.admin` - Allows to reload the plugin (with `/ttt reload`)
 
 > [!NOTE]
 > Wait for extended permissions in upcoming versions!
@@ -36,8 +36,8 @@ items:
 messages:
   "prefix": "&#F0F8FF[TicTacToe] &r"
   "info": "&#318CE7Info:\n
-  &#318CE7/ttc invite <Player>&#F0F8FF - invite a player to play tic tac toe\n
-  &#318CE7/ttc accept&#F0F8FF - accept play request"
+  &#318CE7/ttt invite <Player>&#F0F8FF - invite a player to play tic tac toe\n
+  &#318CE7/ttt accept&#F0F8FF - accept play request"
   "only-players": "&#CF1020Only players can use this command."
   "command-not-found": "&#CF1020Command wasn't found!"
   "provide-a-name": "&#CF1020Provide the name of a player to invite!"
@@ -45,7 +45,7 @@ messages:
   "cant-send-to-yourself": "&#CF1020You can't send a request to yourself!"
   "previous-request-was-deleted": "&#FECB00Your previous request was deleted!"
   "request-sent-successfully": "&#318CE7The request was sent &nsuccessfully!"
-  "received-a-request": "&#318CE7You have received a request to play!\nType &n/ttc accept&r&#318CE7 to accept!"
+  "received-a-request": "&#318CE7You have received a request to play!\nType &n/ttt accept&r&#318CE7 to accept!"
   "request-to-play-wasnt-found": "&#CF1020The request wasn't found!"
   "request-was-accepted": "&#8EE53FYour play request was accepted!"
   "you-accepted-request": "&#8EE53FYou've accepted the request from %s."
@@ -56,7 +56,7 @@ messages:
   "you-aborted-game": "&#CF1020You've aborted the game! You lost."
 
   # Gui messages (that are shown in game inventory)
-  "gui-prefix": "[TTC] "
+  "gui-prefix": "[TTT] "
   "gui-player's-turn": "%s's turn!"
   "gui-draw": "Draw!"
   "gui-player-won": "%s won!"
