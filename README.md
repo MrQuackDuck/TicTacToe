@@ -20,11 +20,12 @@
 
 ## Permissions
 
-- `tictactoe.admin` - Allows to reload the plugin (with `/ttt reload`)
+- `tictactoe.admin` _(for **operators** by default)_ — Allows to reload the plugin (with `/ttt reload`)
+- `tictactoe.invite` _(**true** by default)_ — Allows a player to invite other players to play (with `/ttt invite <player>`)
+- `tictactoe.accept` _(**true** by default)_ — Allows a player to accept other player's invites (with `/ttt accept`)
 
-> [!NOTE]
-> Wait for extended permissions in upcoming versions!
-</p>
+> [!CAUTION]
+> A player with `tictactoe.accept` permissions set to `false` won't see incoming play requests.
 
 ## Default config
 ```yml
@@ -33,19 +34,31 @@ items:
   "first": "BLUE_DYE"
   "second": "RED_DYE"
 
+misc:
+  # Determines if in chat will appear a message
+  # that tells about someone won against someone in Tic Tac Toe
+  "broadcastWinEnabled": false
+
+  # Determines if in chat will appear a message
+  # that tells about two players had a draw in Tic Tac Toe
+  "broadcastDrawEnabled": false
+
 messages:
   "prefix": "&#F0F8FF[TicTacToe] &r"
   "info": "&#318CE7Info:\n
   &#318CE7/ttt invite <Player>&#F0F8FF - invite a player to play tic tac toe\n
   &#318CE7/ttt accept&#F0F8FF - accept play request"
+  "broadcast-win-message": "&#318CE7%s won against %s!"
+  "broadcast-draw-message": "&#318CE7%s and %s have a draw!"
   "only-players": "&#CF1020Only players can use this command."
-  "command-not-found": "&#CF1020Command wasn't found!"
+  "command-not-found": "&#CF1020Command wasn't found! Maybe you don't have enough permissions?"
   "provide-a-name": "&#CF1020Provide the name of a player to invite!"
   "player-wasnt-found": "&#CF1020Player wasn't found!"
   "cant-send-to-yourself": "&#CF1020You can't send a request to yourself!"
+  "receiver-does-not-have-enough-permissions": "&#CF1020This player doesn't have enough permissions to accept your play request!"
   "previous-request-was-deleted": "&#FECB00Your previous request was deleted!"
-  "request-sent-successfully": "&#318CE7The request was sent &nsuccessfully!"
-  "received-a-request": "&#318CE7You have received a request to play!\nType &n/ttt accept&r&#318CE7 to accept!"
+  "request-sent-successfully": "&#318CE7The request was sent &nsuccessfully&r&#318CE7!"
+  "received-a-request": "&#318CE7You have received a request to play from &#F0F8FF%s&#318CE7!\nType &n/ttt accept&r&#318CE7 to accept!"
   "request-to-play-wasnt-found": "&#CF1020The request wasn't found!"
   "request-was-accepted": "&#8EE53FYour play request was accepted!"
   "you-accepted-request": "&#8EE53FYou've accepted the request from %s."
