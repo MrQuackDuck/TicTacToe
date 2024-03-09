@@ -8,17 +8,17 @@
 
  **TicTacToe** is a **Spigot** plugin that allows you to play **Tic Tac Toe** with your friends in inventory-based GUI.
 
-## Screenshots
+## 📷 Screenshots
 <img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/52ae74ca-efe1-4391-83cf-abcaa8650e55" />
 <img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/1f503a64-0865-43cc-9fdf-6f6c44a5496b" />
 
-## Commands
+## 💻 Commands
 - `/ttt info` — shows info about commands.
 - `/ttt invite <player>` — invite a player to play.
 - `/ttt accept` — accept the invite to play.
 - `/ttt reload` — reload the config.
 
-## Permissions
+## 🔞 Permissions
 
 - `tictactoe.admin` _(for **operators** by default)_ — Allows to reload the plugin (with `/ttt reload`)
 - `tictactoe.invite` _(**true** by default)_ — Allows a player to invite other players to play (with `/ttt invite <player>`)
@@ -27,7 +27,7 @@
 > [!CAUTION]
 > A player with `tictactoe.accept` permission set to `false` won't see incoming play requests.
 
-## Default config
+## 📄 Default config
 ```yml
 items:
   # See full list on https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
@@ -79,7 +79,7 @@ messages:
   "failed-to-reload": "&#CF1020Plugin was failed to reload."
 ```
 
-## Getting started
+## ☂ Getting started
 
 > [!IMPORTANT]
 > Before getting started, make sure that the plugin's version is **compatible** with your server version.
