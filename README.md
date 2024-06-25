@@ -1,8 +1,8 @@
-<h1><img width=80 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/144f1da0-3e0f-4e7d-ac27-cdb1f1539b7c" /> <div>TicTacToe</div></h1>
+<h1><img width=80 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/f1b30657-0d3b-4cda-bab8-6f53e57d6c94" /> <div>TicTacToe</div></h1>
 
 <p>
-  <a href="https://www.java.com/"><img src="https://img.shields.io/badge/Java-gray" /></a>
-  <a href="https://hub.spigotmc.org/javadocs/spigot/"><img src="https://img.shields.io/badge/SpigotAPI-orange" /></a>
+  <a href="https://www.java.com/"><img src="https://img.shields.io/badge/Java-gray?color=C8273F" /></a>
+  <a href="https://hub.spigotmc.org/javadocs/spigot/"><img src="https://img.shields.io/badge/Spigot_API-gray?color=F07427&logo=spigotmc&logoColor=FFFFFF" /></a>
   <a href="https://github.com/vshymanskyy/StandWithUkraine"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg"></a>
 </p>
 
@@ -10,7 +10,8 @@
 
 ## 📷 Screenshots
 <img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/52ae74ca-efe1-4391-83cf-abcaa8650e55" />
-<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/1f503a64-0865-43cc-9fdf-6f6c44a5496b" />
+<img height=300 src="https://github.com/MrQuackDuck/TicTacToe/assets/61251075/d9139e12-759c-4846-b7bb-62a0ee862bfd" />
+
 
 ## 💻 Commands
 - `/ttt info` — shows info about commands.
@@ -32,9 +33,13 @@
 items:
   # See full list on https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
   "first": "BLUE_DYE"
-  "second": "RED_DYE"
+  "second": "WHITE_DYE"
 
 misc:
+  # Determines if a firework will be spawned
+  # for winner
+  "spawnFireworkForWinner": true
+
   # Determines if in chat will appear a message
   # that tells about someone won against someone in Tic Tac Toe
   "broadcastWinEnabled": false
