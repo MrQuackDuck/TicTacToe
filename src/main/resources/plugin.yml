@@ -2,6 +2,7 @@ name: TicTacToe
 version: '${project.version}'
 main: net.justempire.tictactoe.TicTacToe
 api-version: '1.16'
+author: 'mrquackduck'
 
 commands:
   tictactoe:

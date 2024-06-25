@@ -1,9 +1,13 @@
 items:
   # See full list on https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
   "first": "BLUE_DYE"
-  "second": "RED_DYE"
+  "second": "WHITE_DYE"
 
 misc:
+  # Determines if a firework will be spawned
+  # for winner
+  "spawnFireworkForWinner": true
+
   # Determines if in chat will appear a message
   # that tells about someone won against someone in Tic Tac Toe
   "broadcastWinEnabled": false

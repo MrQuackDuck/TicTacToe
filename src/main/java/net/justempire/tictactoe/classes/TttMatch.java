@@ -4,6 +4,7 @@ import net.justempire.tictactoe.TicTacToe;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -22,11 +23,13 @@ public class TttMatch {
     private final int[] field;
     private final Player firstPlayer;
     private final Player secondPlayer;
+    private boolean matchFinished;
     private Inventory gui;
     private TttPlayer whoseTurn;
+
     private final boolean  broadcastWinEnabled;
     private final boolean broadcastDrawEnabled;
-
+    private final boolean spawnFireworkForWinner;
 
     public TttMatch(Player firstPlayer, Player secondPlayer, JavaPlugin plugin) {
         this.firstPlayer = firstPlayer;
@@ -38,10 +41,11 @@ public class TttMatch {
         this.firstPlayerItem = Material.valueOf(items.get("first").toString());
         this.secondPlayerItem = Material.valueOf(items.get("second").toString());
 
-        // Getting misc information from the config
-        ConfigurationSection misc = plugin.getConfig().getConfigurationSection("misc");
-        this.broadcastWinEnabled = (boolean) misc.get("broadcastWinEnabled");
-        this.broadcastDrawEnabled = (boolean) misc.get("broadcastDrawEnabled");
+        // Getting additional information from the config
+        ConfigurationSection config = plugin.getConfig().getConfigurationSection("misc");
+        this.broadcastWinEnabled = (boolean) config.get("broadcastWinEnabled");
+        this.broadcastDrawEnabled = (boolean) config.get("broadcastDrawEnabled");
+        this.spawnFireworkForWinner = (boolean) config.get("spawnFireworkForWinner");
 
         // Initializing the field
         field = new int[9];
@@ -133,6 +137,8 @@ public class TttMatch {
     }
 
     public void win(TttPlayer player) {
+        this.matchFinished = true;
+
         Player winner;
         Player looser;
 
@@ -156,6 +162,10 @@ public class TttMatch {
         winner.sendMessage(winMessage);
         looser.sendMessage(loseMessage);
         updateGui(String.format(TicTacToe.getMessage(this, "gui-player-won", true), winner.getDisplayName()));
+
+        // Spawn firework near the winner (if enabled in config)
+        if (this.spawnFireworkForWinner)
+            winner.getWorld().spawnEntity(winner.getLocation(), EntityType.FIREWORK);
 
         new TttEndGameTask(this).runTaskLater(this.plugin, 30);
     }
@@ -185,6 +195,9 @@ public class TttMatch {
     }
 
     public void gameAbortedByPlayer(TttPlayer player) {
+        // Don't do anything when match is already finished
+        if (this.matchFinished) return;
+
         String winMessage = TicTacToe.getMessage(this, "opponent-aborted-game");
         String loseMessage = TicTacToe.getMessage(this, "you-aborted-game");
 

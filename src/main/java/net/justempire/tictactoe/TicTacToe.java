@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public final class TicTacToe extends JavaPlugin {
     public static List<TttMatch> matches = new ArrayList<>();
@@ -18,10 +19,15 @@ public final class TicTacToe extends JavaPlugin {
 
     private static Map<String, String> messages = new HashMap<>();
 
+    private Logger logger;
+
     @Override
     public void onEnable() {
         // Creating a config if it doesn't exist
         saveDefaultConfig();
+
+        // Setting up logger
+        logger = this.getLogger();
 
         // Setting up the config
         configure();
@@ -33,12 +39,12 @@ public final class TicTacToe extends JavaPlugin {
         // Registering inventory interaction events
         getServer().getPluginManager().registerEvents(new InventoryListener(), this);
 
-        System.out.println("[TicTacToe] Enabled successfully!");
+        logger.info("[TicTacToe] Enabled successfully!");
     }
 
     @Override
     public void onDisable() {
-        System.out.println("[TicTacToe] Shutting down!");
+        logger.info("[TicTacToe] Shutting down!");
     }
 
     private void configure() {
